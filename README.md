@@ -1,6 +1,6 @@
 # ReactDemoApps
 
-This repo contains ~15 React demo apps. These applications were created as a hands on training course to improve my React skills.
+This repo wii contain ~15 React demo apps. These applications were created as a hands on training course to improve my React skills.
 
 This is the Udemy course:
 
