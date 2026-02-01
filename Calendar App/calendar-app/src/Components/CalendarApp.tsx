@@ -15,6 +15,7 @@ const CalendarApp = () => {
   const [events, setEvents] = useState([]);
   const [eventTime, setEventTime] = useState({hours: '00', minutes: '00'});
   const [eventText, setEventText] = useState('');
+  const [editingEvent, setEditingEvent] = useState(null);
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
@@ -40,6 +41,7 @@ const CalendarApp = () => {
        setEventTime({hours: '00', minutes: '00'});
        setSelectedDate(clickedDate);
        setShowEventPopup(true);
+       setEditingEvent(null);
      }
   }
 
@@ -51,16 +53,52 @@ const CalendarApp = () => {
 
   const handleEventSubmit = () => {
     const newEvent = {
+      id: editingEvent ? editingEvent.id : Date.now(),
       date: selectedDate,
       time: `${eventTime.hours.padStart(2, '0')}:${eventTime.minutes.padStart(2, '0')}`,
       text: eventText,
     }
-    setEvents([...events, newEvent]);
+
+    let updatedEvents = [...events];
+    if (editingEvent) {
+      updatedEvents = updatedEvents.map(event => event.id === editingEvent.id ? newEvent : event);
+    } else {
+      updatedEvents.push(newEvent);
+    }
+
+    updatedEvents.sort((a, b) => new Date(a.date) - new Date(b.date) || a.time.localeCompare(b.time));
+
+    setEvents(updatedEvents);
     setEventTime({hours: '00', minutes: '00'});
     setEventText("");
     setShowEventPopup(false);
+    setEditingEvent(null);
   }
 
+  const handleEditEvents = (event) => {
+    setSelectedDate(new Date(event.date));
+    setEventTime({
+      hours: event.time.split(':')[0],
+      minutes: event.time.split(':')[1],
+
+  })
+  setEventText(event.text);
+  setEditingEvent(event);
+  setShowEventPopup(true);
+  }
+
+  const handleDeleteEvent = (eventId) => {
+    const updatedEvents = events.filter(event => event.id !== eventId);
+    setEvents(updatedEvents);
+  }
+
+  const handleTimeChange = (e) => {
+    const {name, value} = e.target;
+    setEventTime((prevTime) => ({
+      ...prevTime,
+      [name]: value.padStart(2, '0'),
+    }));
+  }
   return <><div className="calendar-app">
     <div className="calendar">
     <h1 className="heading">Calendar</h1>
@@ -88,8 +126,8 @@ const CalendarApp = () => {
       <div className="event-popup">
       <div className="time-input">
         <div className="event-popup-time">Time</div>
-          <input type="number" name = "hours" min={0} max={24} className="hours" value={eventTime.hours} onChange={(e) => setEventTime({...eventTime, hours: e.target.value})}/>
-          <input type="number" name = "minutes" min={0} max={60} className="minutes" value={eventTime.minutes} onChange={(e) => setEventTime({...eventTime, minutes: e.target.value})}/>
+          <input type="number" name = "hours" min={0} max={24} className="hours" value={eventTime.hours} onChange={handleTimeChange}/>
+          <input type="number" name = "minutes" min={0} max={60} className="minutes" value={eventTime.minutes} onChange={handleTimeChange}/>
         </div>
         <textarea placeholder="Enter Event Text (Maximum 60 Characters)" value={eventText} onChange={(e) => {
           if (e.target.value.length <= 60) {
@@ -97,7 +135,7 @@ const CalendarApp = () => {
           }
         }}
         ></textarea>
-        <button className="event-popup-btn" onClick={handleEventSubmit}>Add Event</button>
+        <button className="event-popup-btn" onClick={handleEventSubmit}>{editingEvent ? "Update Event" : "Add Event"}</button>
         <button className="close-event-popup" onClick={() => setShowEventPopup(false)}>
           <i className="bx bx-x"></i>
         </button>
@@ -111,8 +149,8 @@ const CalendarApp = () => {
         </div>
         <div className="event-text">{event.text}</div>
         <div className="event-buttons">
-          <i className="bx bxs-edit-alt"></i>
-          <i className="bx bxs-message-alt-x"></i>
+          <i className="bx bxs-edit-alt" onClick={() => handleEditEvents(event)}></i>
+          <i className="bx bxs-message-alt-x" onClick={() => handleDeleteEvent(event.id)}></i>
         </div>
       </div>
 ))}
