@@ -12,3 +12,4 @@ And here are the various React apps that you will find here:
 * Weather App
 * Color Converter App
 * Quotes App
+* AI Chat Bot
