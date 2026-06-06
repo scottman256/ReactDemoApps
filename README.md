@@ -10,3 +10,5 @@ And here are the various React apps that you will find here:
 
 * Calendar
 * Weather App
+* Color Converter App
+* Quotes App
