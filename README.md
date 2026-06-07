@@ -13,3 +13,4 @@ And here are the various React apps that you will find here:
 * Color Converter App
 * Quotes App
 * AI Chat Bot
+* News and Blog App
