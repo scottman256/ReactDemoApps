@@ -14,3 +14,4 @@ And here are the various React apps that you will find here:
 * Quotes App
 * AI Chat Bot
 * News and Blog App
+* FAQ Accordian
