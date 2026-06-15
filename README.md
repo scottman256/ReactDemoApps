@@ -15,3 +15,4 @@ And here are the various React apps that you will find here:
 * AI Chat Bot
 * News and Blog App
 * FAQ Accordian
+* Dark Light Toggle
