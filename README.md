@@ -16,3 +16,4 @@ And here are the various React apps that you will find here:
 * News and Blog App
 * FAQ Accordian
 * Dark Light Toggle
+* Shopping Cart App
