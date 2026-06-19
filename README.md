@@ -17,3 +17,4 @@ And here are the various React apps that you will find here:
 * FAQ Accordian
 * Dark Light Toggle
 * Shopping Cart App
+* Apple Products Store
