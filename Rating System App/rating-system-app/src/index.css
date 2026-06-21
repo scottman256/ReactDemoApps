@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-kanit: 'Kanit', sans-serif;
+}
+
+.font-kanit {
+  font-family: var(--font-kanit);
+}
