@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+* {
+  font-family: 'Prompt', sans-serif;
+}
+
+@theme {
+  --blue-950: #000814;
+  --blue-900: #001d3d;
+  --blue-800: #003566;
+  --yellow-500: #ffc300;
+  --yellow-400: #ffd60a;
+  --yellow-300: #ffe345;
+}
+
+.animate-pulse-slow {
+  animation: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-3000 {
+  animation-delay: 3s;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
