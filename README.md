@@ -19,3 +19,7 @@ And here are the various React apps that you will find here:
 * Shopping Cart App
 * Apple Products Store
 * Portfolio Website
+* 5 Star Rating System/
+* Photo Slider App
+* Auth Forms App
+* Travel Modal
